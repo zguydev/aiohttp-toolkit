@@ -3,7 +3,6 @@ from typing import Any, Optional, Union
 import aiohttp
 
 
-@staticmethod
 async def status(
     client_response: aiohttp.ClientResponse,
     **kwargs,
@@ -19,7 +18,6 @@ async def status(
 
     return out, None
 
-@staticmethod
 async def read(
     client_response: aiohttp.ClientResponse,
     **kwargs,
@@ -46,7 +44,6 @@ async def read(
 
     return out, None
 
-@staticmethod
 async def text(
     client_response: aiohttp.ClientResponse,
     **kwargs,
@@ -73,7 +70,6 @@ async def text(
 
     return out, None
 
-@staticmethod
 async def json(
     client_response: aiohttp.ClientResponse,
     **kwargs,
