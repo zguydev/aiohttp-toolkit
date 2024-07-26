@@ -72,3 +72,30 @@ async def text(
     )
 
     return out, None
+
+@staticmethod
+async def json(
+    client_response: aiohttp.ClientResponse,
+    **kwargs,
+) -> tuple[dict[str, Any], Optional[Exception]]:
+    r = client_response
+
+    out: dict[str, Any] = {}
+
+    out_partial, _ = await status(
+        client_response=client_response,
+        **kwargs,
+    )
+    out |= out_partial
+
+    json: dict[str, Any]
+    try:
+        json = await r.json()
+    except Exception as err:
+        return out, err
+
+    out |= dict(
+        json=json,
+    )
+
+    return out, None

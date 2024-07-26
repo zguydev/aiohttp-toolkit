@@ -1,3 +1,4 @@
+from typing import Any
 import dataclasses
 
 
@@ -15,3 +16,8 @@ class Read(Status):
 @dataclasses.dataclass
 class Text(Status):
     text: str
+
+
+@dataclasses.dataclass
+class Json(Status):
+    json: dict[str, Any]
