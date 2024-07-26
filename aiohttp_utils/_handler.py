@@ -13,6 +13,7 @@ class RequestHandler:
         params: dict[str, str]={},
         headers: dict[str, str]={},
         cookies: dict[str, str]={},
+        data: Optional[bytes]=None,
         timeout: aiohttp.ClientTimeout = aiohttp.ClientTimeout(total=30),
         **kwargs,
     ) -> aiohttp.client._RequestContextManager:
@@ -22,6 +23,7 @@ class RequestHandler:
             params=params,
             headers=headers,
             cookies=cookies,
+            data=data,
             timeout=timeout,
             **kwargs,
         )
@@ -63,6 +65,7 @@ class RequestHandler:
         params: dict[str, str]={},
         headers: dict[str, str]={},
         cookies: dict[str, str]={},
+        data: Optional[bytes]=None,
         timeout: aiohttp.ClientTimeout = aiohttp.ClientTimeout(total=30),
         **kwargs,
     ) -> tuple[
@@ -76,6 +79,7 @@ class RequestHandler:
             params=params,
             headers=headers,
             cookies=cookies,
+            data=data,
             timeout=timeout,
             **kwargs,
         )
