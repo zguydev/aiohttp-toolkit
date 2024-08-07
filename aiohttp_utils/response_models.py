@@ -21,3 +21,8 @@ class Text(Status):
 @dataclasses.dataclass
 class Json(Status):
     json: dict[str, Any]
+
+
+@dataclasses.dataclass
+class JsonList(Status):
+    json: list[Any]
