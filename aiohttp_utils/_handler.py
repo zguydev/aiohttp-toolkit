@@ -6,7 +6,7 @@ from http.cookies import BaseCookie
 import yarl
 import aiohttp
 import aiohttp.helpers
-import multidict as md
+import multidict
 
 from ._types import (
     ResponseCbOut,
@@ -43,7 +43,7 @@ class RequestHandler:
         data: Optional[Union[bytes, Any]] = None,
         json: Optional[Any] = None,
         cookies: Optional[Union[dict[str, str], BaseCookie[str]]] = None,
-        headers: Optional[Mapping[Union[str, md.istr], str]] = None,
+        headers: Optional[Mapping[Union[str, multidict.istr], str]] = None,
         skip_auto_headers: Optional[Iterable[str]] = None,
         auth: Optional[aiohttp.BasicAuth] = None,
         allow_redirects: bool = True,
@@ -137,7 +137,7 @@ class RequestHandler:
         data: Optional[Union[bytes, Any]] = None,
         json: Optional[Any] = None,
         cookies: Optional[Union[dict[str, str], BaseCookie[str]]] = None,
-        headers: Optional[Mapping[Union[str, md.istr], str]] = None,
+        headers: Optional[Mapping[Union[str, multidict.istr], str]] = None,
         allow_redirects: bool = True,
         max_redirects: int = 10,
         proxy: Optional[yarl.URL] = None,
