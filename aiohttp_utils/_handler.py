@@ -8,7 +8,7 @@ import aiohttp
 import aiohttp.helpers
 import multidict
 
-from ._types import (
+from .types import (
     ResponseCbOut,
     CbBuilderOut,
 )

@@ -2,7 +2,7 @@ from typing import Any, Optional, Union
 
 import aiohttp as _aiohttp
 
-from ._types import CbBuilderOut
+from .types import CbBuilderOut
 
 
 __all__ = (
