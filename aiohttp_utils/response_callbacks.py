@@ -59,7 +59,7 @@ Returns:
     read (bytes): response body bytes
 """
 
-text = _cbuilder.build(
+text = _cbuilder.develop(
     properties,
     _cbb.text,
 )
@@ -81,7 +81,7 @@ Returns:
     text (str): response body decoded
 """
 
-json = _cbuilder.build(
+json = _cbuilder.develop(
     properties,
     _cbb.json,
 )
