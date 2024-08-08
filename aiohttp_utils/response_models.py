@@ -1,5 +1,8 @@
 from typing import Any
 import dataclasses
+import http.cookies
+
+import multidict
 
 
 @dataclasses.dataclass
@@ -9,20 +12,31 @@ class Status:
 
 
 @dataclasses.dataclass
-class Read(Status):
+class Info(Status):
+    headers: multidict.CIMultiDictProxy[str]
+    cookies: http.cookies.BaseCookie
+
+
+@dataclasses.dataclass
+class Read(Info):
     read: bytes
 
 
 @dataclasses.dataclass
-class Text(Status):
+class Text(Info):
     text: str
 
 
 @dataclasses.dataclass
-class Json(Status):
+class JsonObj(Info):
     json: dict[str, Any]
 
 
 @dataclasses.dataclass
-class JsonList(Status):
+class JsonList(Info):
     json: list[Any]
+
+
+@dataclasses.dataclass
+class JsonAny(Info):
+    json: Any
