@@ -14,7 +14,25 @@ from ._types import (
 )
 
 
+__all__ = ("RequestHandler", "CallbackBuilder")
+
+
 class RequestHandler:
+    """
+    A class for executing HTTP requests using `aiohttp` and handling the
+    response via a callback.
+
+    The `RequestHandler` class provides a static method to perform HTTP
+    requests with various configurations, handle the response via a callback
+    function, and return the processed data along with any exceptions in a
+    Golang-style return format.
+
+    Methods:
+        `request` method performs an HTTP request, processes the response
+        with a callback, and returns the handled data along with any
+        exceptions.
+    """
+
     @staticmethod
     def _prepare_request(
         session: aiohttp.ClientSession,
@@ -126,7 +144,8 @@ class RequestHandler:
         timeout: Optional[aiohttp.ClientTimeout] = None,
         **kwargs,
     ) -> tuple[dict[str, Any], Optional[Exception]]:
-        """Perform an HTTP request with handling the response with callback
+        """
+        Perform an HTTP request with handling the response with callback
         and returning handled data, while also using Golang-style return
         exception.
 
@@ -195,12 +214,13 @@ class CallbackBuilder:
     A utility class for building HTTP response callback handlers that can
     sequentially process data using a chain of handlers.
 
-    The `build` method returns a callback function that will process an
-    `aiohttp.ClientResponse` object using the provided handlers.
+    Methods:
+        `build` method returns a callback function that will process an
+        `aiohttp.ClientResponse` object using the provided handlers.
 
-    The `develop` method returns a callback function that will process an
-    `aiohttp.ClientResponse` object using the provided handlers, developing
-    the built callback with new handlers.
+        `develop` method returns a callback function that will process an
+        `aiohttp.ClientResponse` object using the provided handlers, developing
+        the built callback with new handlers.
     """
 
     @staticmethod
