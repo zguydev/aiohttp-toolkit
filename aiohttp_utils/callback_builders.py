@@ -17,106 +17,155 @@ __all__ = (
 
 
 async def status(
-    out: dict[str, Any],
+    data: dict[str, Any],
     cr: _aiohttp.ClientResponse,
     **kwargs,
 ) -> CbBuilderOut:
-    out |= dict(
+    """
+    Status callback builder.
+
+    Adds `status (str)` and `ok (bool)` fields to handled data
+    """
+
+    data |= dict(
         status=cr.status,
         ok=cr.ok,
     )
 
-    return out, None
+    return data, None
 
 
 async def headers(
-    out: dict[str, Any],
+    data: dict[str, Any],
     cr: _aiohttp.ClientResponse,
     **kwargs,
 ) -> CbBuilderOut:
-    out |= dict(
+    """
+    Headers callback builder.
+
+    Adds `headers (multidict.CIMultiDictProxy[str])` field to handled data
+    """
+
+    data |= dict(
         headers=cr.headers,
     )
 
-    return out, None
+    return data, None
 
 
 async def cookies(
-    out: dict[str, Any],
+    data: dict[str, Any],
     cr: _aiohttp.ClientResponse,
     **kwargs,
 ) -> CbBuilderOut:
-    out |= dict(
+    """
+    Cookies callback builder.
+
+    Adds `cookies (http.cookies.SimpleCookie)` field to handled data
+    """
+
+    data |= dict(
         cookies=cr.cookies,
     )
 
-    return out, None
+    return data, None
 
 
 async def read(
-    out: dict[str, Any],
+    data: dict[str, Any],
     cr: _aiohttp.ClientResponse,
     **kwargs,
 ) -> CbBuilderOut:
+    """
+    Read callback builder.
+
+    Adds `read (bytes)` field to handled data
+    """
+
     read: bytes
     try:
         read = await cr.read()
     except Exception as err:
-        return out, err
+        return data, err
 
-    out |= dict(
+    data |= dict(
         read=read,
     )
 
-    return out, None
+    return data, None
 
 
 async def text(
-    out: dict[str, Any],
+    data: dict[str, Any],
     cr: _aiohttp.ClientResponse,
     **kwargs,
 ) -> CbBuilderOut:
+    """
+    Text callback builder.
+
+    Adds `text (str)` field to handled data.
+
+    Takes kwargs by `"text"` key from parent kwargs and unpacks as
+    `aiohttp.ClientResponse.text(**kwargs)`
+    """
+
     kwargs = kwargs.get("text", {})
 
     text: str
     try:
         text = await cr.text(**kwargs)
     except Exception as err:
-        return out, err
+        return data, err
 
-    out |= dict(
+    data |= dict(
         text=text,
     )
 
-    return out, None
+    return data, None
 
 
 async def json(
-    out: dict[str, Any],
+    data: dict[str, Any],
     cr: _aiohttp.ClientResponse,
     **kwargs,
 ) -> CbBuilderOut:
+    """
+    Json callback builder.
+
+    Adds `json (Any)` field to handled data.
+
+    Takes kwargs by `"json"` key from parent kwargs and unpacks as
+    `aiohttp.ClientResponse.json(**kwargs)`
+    """
+
     kwargs = kwargs.get("json", {})
 
     json: Union[dict[str, Any], list[Any], Any]
     try:
         json = await cr.json(**kwargs)
     except Exception as err:
-        return out, err
+        return data, err
 
-    out |= dict(
+    data |= dict(
         json=json,
     )
 
-    return out, None
+    return data, None
 
 
 async def close(
-    out: dict[str, Any],
+    data: dict[str, Any],
     cr: _aiohttp.ClientResponse,
     **kwargs,
 ) -> CbBuilderOut:
+    """
+    Close callback builder.
+
+    A special callback builder that is used to close ahead
+    `aiohttp.ClientResponse` to release resources
+    """
+
     cr.release()
     await cr.wait_for_close()
-    
-    return out, None
+
+    return data, None
