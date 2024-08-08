@@ -234,11 +234,11 @@ class CallbackBuilder:
         Build a response callback function from a sequence of asynchronous
         handlers.
 
-        Each handler is an asynchronous function that processes a dictionary
-        and an `aiohttp.ClientResponse` object. The handlers are executed in
-        the order they are provided. If any handler returns an error, the
-        process is terminated, and the error is returned, while also returning
-        a built prior to that handler dictionary.
+        Each handler is an asynchronous function that processes a data
+        dictionary and an `aiohttp.ClientResponse` object. The handlers are
+        executed in the order they are provided. If any handler returns an
+        error, the process is terminated, and the error is returned, while
+        also return a built prior to that handler dictionary.
 
         Args:
             *handlers: A variable number of asynchronous handler functions,
