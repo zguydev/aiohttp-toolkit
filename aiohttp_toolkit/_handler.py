@@ -56,9 +56,6 @@ class RequestHandler:
         proxy: Optional[yarl.URL] = None,
         proxy_auth: Optional[aiohttp.BasicAuth] = None,
         timeout: Optional[aiohttp.ClientTimeout] = None,
-        verify_ssl: Optional[bool] = None,
-        fingerprint: Optional[bytes] = None,
-        ssl_context: Optional[ssl.SSLContext] = None,
         ssl: Union[bool, ssl.SSLContext, aiohttp.Fingerprint] = True,
         server_hostname: Optional[str] = None,
         proxy_headers: Optional[dict[str, str]] = None,
@@ -67,6 +64,9 @@ class RequestHandler:
         auto_decompress: Optional[bool] = None,
         max_line_size: Optional[int] = None,
         max_field_size: Optional[int] = None,
+        verify_ssl: Optional[bool] = None,
+        fingerprint: Optional[bytes] = None,
+        ssl_context: Optional[ssl.SSLContext] = None,
     ) -> aiohttp.client._RequestContextManager:
         timeout_value = timeout if timeout is not None else aiohttp.helpers.sentinel
 
@@ -90,9 +90,6 @@ class RequestHandler:
             proxy=proxy,
             proxy_auth=proxy_auth,
             timeout=timeout_value,  # ! timeout_value is used instead of timeout
-            verify_ssl=verify_ssl,
-            fingerprint=fingerprint,
-            ssl_context=ssl_context,
             ssl=ssl,
             server_hostname=server_hostname,
             proxy_headers=proxy_headers,
@@ -101,6 +98,9 @@ class RequestHandler:
             auto_decompress=auto_decompress,
             max_line_size=max_line_size,
             max_field_size=max_field_size,
+            verify_ssl=verify_ssl, # type: ignore Deprecated since version 3.0
+            fingerprint=fingerprint, # type: ignore Deprecated since version 3.0
+            ssl_context=ssl_context, # type: ignore Deprecated since version 3.0
         )
         return r
 
