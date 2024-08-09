@@ -3,7 +3,7 @@ import asyncio
 import aiohttp
 import yarl
 
-import aiohttp_utils as aiohu
+import aiohttp_toolkit as aiohtk
 
 
 class Client:
@@ -11,9 +11,9 @@ class Client:
         self._session = aiohttp.ClientSession()
 
     async def fetch(self, url: yarl.URL) -> None:
-        out, err = await aiohu.RequestHandler.request(
+        out, err = await aiohtk.RequestHandler.request(
             session=self._session,
-            response_callback=aiohu.callbacks.text,
+            response_callback=aiohtk.callbacks.text,
             response_callback_kwargs={},
             method="GET",
             url=url,
@@ -21,7 +21,7 @@ class Client:
         if err:
             raise err
 
-        res = aiohu.models.Text(**out)
+        res = aiohtk.models.Text(**out)
         if not res.ok:
             raise RuntimeError(f"response is not ok: {res.status=}")
 

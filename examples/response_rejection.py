@@ -6,7 +6,7 @@ import asyncio
 import aiohttp
 import yarl
 
-import aiohttp_utils as aiohu
+import aiohttp_toolkit as aiohtk
 
 
 class ResponseRejectedError(aiohttp.ClientResponseError):
@@ -21,7 +21,7 @@ async def check_rejection(
     data: dict[str, Any],
     cr: aiohttp.ClientResponse,
     **kwargs,
-) -> aiohu.types.CbBuilderOut:
+) -> aiohtk.types.CbBuilderOut:
     max_num = max(data["json"])
 
     data |= dict(
@@ -43,15 +43,15 @@ async def check_rejection(
     return data, None
 
 
-check_response = aiohu.CallbackBuilder.develop(
-    aiohu.callbacks.json,
-    aiohu.builders.close,
+check_response = aiohtk.CallbackBuilder.develop(
+    aiohtk.callbacks.json,
+    aiohtk.builders.close,
     check_rejection,
 )
 
 
 @dataclasses.dataclass
-class Checked(aiohu.models.JsonList):
+class Checked(aiohtk.models.JsonList):
     max_num: int
 
     def __repr__(self) -> str:
@@ -73,7 +73,7 @@ async def main() -> None:
 
     async with aiohttp.ClientSession() as session:
         requests = [
-            aiohu.RequestHandler.request(
+            aiohtk.RequestHandler.request(
                 session=session,
                 response_callback=check_response,
                 response_callback_kwargs={},

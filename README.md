@@ -1,3 +1,3 @@
-# aiohttp_utils
+# aiohttp-toolkit
 
-`aiohttp_utils` - module to ease the process of handling aiohttp with premade functions
+`aiohttp-toolkit` - package to ease the process of handling aiohttp with premade functions

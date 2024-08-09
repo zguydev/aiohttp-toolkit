@@ -5,28 +5,28 @@ import asyncio
 import aiohttp
 import yarl
 
-import aiohttp_utils as aiohu
+import aiohttp_toolkit as aiohtk
 
 
 async def set_url(
     data: dict[str, Any],
     cr: aiohttp.ClientResponse,
     **kwargs,
-) -> aiohu.types.CbBuilderOut:
+) -> aiohtk.types.CbBuilderOut:
     data |= dict(
         _url=cr.url,
     )
 
     return data, None
 
-json_with_url = aiohu.CallbackBuilder.develop(
-    aiohu.callbacks.json,
+json_with_url = aiohtk.CallbackBuilder.develop(
+    aiohtk.callbacks.json,
     set_url,
 )
 
 
 @dataclasses.dataclass
-class JsonAnyWithUrl(aiohu.models.JsonAny):
+class JsonAnyWithUrl(aiohtk.models.JsonAny):
     _url: yarl.URL
 
     def __repr__(self) -> str:
@@ -40,7 +40,7 @@ async def main() -> None:
     url = yarl.URL("https://httpbin.dev/json")
 
     async with aiohttp.ClientSession() as session:
-        out, err = await aiohu.RequestHandler.request(
+        out, err = await aiohtk.RequestHandler.request(
             session=session,
             response_callback=json_with_url,
             response_callback_kwargs={},

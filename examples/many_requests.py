@@ -6,7 +6,7 @@ import collections
 import aiohttp
 import yarl
 
-import aiohttp_utils as aiohu
+import aiohttp_toolkit as aiohtk
 
 
 async def main() -> None:
@@ -16,9 +16,9 @@ async def main() -> None:
         start = time.perf_counter()
 
         requests = [
-            aiohu.RequestHandler.request(
+            aiohtk.RequestHandler.request(
                 session=session,
-                response_callback=aiohu.callbacks.text,
+                response_callback=aiohtk.callbacks.text,
                 response_callback_kwargs={},
                 method="GET",
                 url=url,

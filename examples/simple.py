@@ -3,16 +3,16 @@ import asyncio
 import aiohttp
 import yarl
 
-import aiohttp_utils as aiohu
+import aiohttp_toolkit as aiohtk
 
 
 async def main() -> None:
     url = yarl.URL("https://example.com")
 
     async with aiohttp.ClientSession() as session:
-        out, err = await aiohu.RequestHandler.request(
+        out, err = await aiohtk.RequestHandler.request(
             session=session,
-            response_callback=aiohu.callbacks.text,
+            response_callback=aiohtk.callbacks.text,
             response_callback_kwargs={},
             method="GET",
             url=url,
@@ -20,7 +20,7 @@ async def main() -> None:
         if err:
             raise err
 
-        res = aiohu.models.Text(**out)
+        res = aiohtk.models.Text(**out)
         if not res.ok:
             raise RuntimeError(f"response is not ok: {res.status=}")
 
