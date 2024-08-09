@@ -185,7 +185,7 @@ class RequestHandler:
             ```
         """
 
-        client_context = RequestHandler._prepare_request(
+        request_context = RequestHandler._prepare_request(
             session=session,
             method=method,
             url=url,
@@ -202,7 +202,7 @@ class RequestHandler:
         )
 
         out, err = await RequestHandler._process_request(
-            request_context=client_context,
+            request_context=request_context,
             response_callback=response_callback,
             **response_callback_kwargs,
         )
