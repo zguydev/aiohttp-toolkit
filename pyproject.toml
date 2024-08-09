@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aiohttp-toolkit"
-version = "0.1.0"
+version = "0.1.1"
 description = "aiohttp-toolkit - package to ease the process of handling aiohttp with premade functions"
 license = "Apache-2.0"
 authors = ["ZGuyDev <77798764+ZGuyDev@users.noreply.github.com>"]
