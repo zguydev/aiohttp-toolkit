@@ -2,8 +2,14 @@
 name = "aiohttp-utils"
 version = "0.1.0"
 description = "aiohttp_utils - module to ease the process of handling aiohttp with premade functions"
+license = "Apache-2.0"
 authors = ["ZGuyDev <77798764+ZGuyDev@users.noreply.github.com>"]
 readme = "README.md"
+repository = "https://github.com/zguydev/aiohttp-utils"
+keywords = ["aiohttp", "poetry"]
+classifiers = ["Framework :: aiohttp"]
+packages = [{ include = "aiohttp_utils" }]
+
 
 [tool.poetry.dependencies]
 python = "^3.9"
