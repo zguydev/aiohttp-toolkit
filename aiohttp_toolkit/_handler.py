@@ -5,7 +5,6 @@ from http.cookies import BaseCookie
 
 import yarl
 import aiohttp
-import aiohttp.helpers
 import multidict
 
 from .types import (
