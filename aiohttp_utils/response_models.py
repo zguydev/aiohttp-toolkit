@@ -18,6 +18,9 @@ class Status:
     
     status: int
     ok: bool
+    
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__}({self.status})>"
 
 
 @dataclasses.dataclass
@@ -29,6 +32,12 @@ class Properties(Status):
     
     headers: multidict.CIMultiDictProxy[str]
     cookies: http.cookies.BaseCookie
+    
+    def __repr__(self) -> str:
+        return (
+            f"<{self.__class__.__name__}({self.status}): "
+            "{}>".format(repr(self.headers).strip("<>"))
+        )
 
 
 @dataclasses.dataclass
@@ -39,6 +48,9 @@ class Read(Properties):
     """
     
     read: bytes
+    
+    def __repr__(self) -> str:
+        return super().__repr__()
 
 
 @dataclasses.dataclass
@@ -49,6 +61,9 @@ class Text(Properties):
     """
     
     text: str
+    
+    def __repr__(self) -> str:
+        return super().__repr__()
 
 
 @dataclasses.dataclass
@@ -60,6 +75,9 @@ class JsonObj(Properties):
     """
     
     json: dict[str, Any]
+    
+    def __repr__(self) -> str:
+        return super().__repr__()
 
 
 @dataclasses.dataclass
@@ -71,6 +89,9 @@ class JsonList(Properties):
     """
     
     json: list[Any]
+    
+    def __repr__(self) -> str:
+        return super().__repr__()
 
 
 @dataclasses.dataclass
@@ -82,3 +103,6 @@ class JsonAny(Properties):
     """
     
     json: Any
+    
+    def __repr__(self) -> str:
+        return super().__repr__()
