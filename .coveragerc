@@ -1,0 +1,13 @@
+[paths]
+source =
+   ../aiohttp_toolkit
+
+[run]
+branch = true
+parallel = true
+
+[report]
+show_missing = true
+precision = 2
+exclude_lines =
+   def __repr__
