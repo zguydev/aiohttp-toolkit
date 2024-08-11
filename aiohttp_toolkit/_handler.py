@@ -1,4 +1,6 @@
-from typing import Any, Optional, Union, Literal, Callable, Awaitable, Iterable, Mapping
+from typing import (
+    Any, Optional, Union, Literal, Callable, Awaitable, Iterable, Mapping,
+)
 import types
 import ssl
 from http.cookies import BaseCookie
@@ -67,7 +69,7 @@ class RequestHandler:
         fingerprint: Optional[bytes] = None,
         ssl_context: Optional[ssl.SSLContext] = None,
     ) -> aiohttp.client._RequestContextManager:
-        timeout_value = timeout if timeout is not None else aiohttp.helpers.sentinel
+        timeout_value = timeout or aiohttp.helpers.sentinel
 
         r = session.request(
             method=method,
@@ -151,17 +153,29 @@ class RequestHandler:
         Args:
             **kwargs: Passed to `aiohttp.ClientSession.request`
             session: Interface for making HTTP requests
-            response_callback: Response callback that is being called after response (if request was successful)
-            response_callback_kwargs: Kwargs that are passed to response callback
+            response_callback: Response callback that is being called after \
+                response (if request was successful)
+            response_callback_kwargs: Kwargs that are passed to response \
+                callback
             method: HTTP method
             url: Request URL
-            params: Sent as parameters in the query string of the new request. Ignored for subsequent redirected requests (optional). Defaults to `{}`.
-            data: The data to send in the body of the request. This can be a FormData object or anything that can be passed into FormData, e.g. a dictionary, bytes, or file-like object. Defaults to `None`.
-            json: Any json compatible python object. json and data parameters could not be used at the same time. Defaults to `None`.
-            cookies: HTTP Cookies to send with the request. Global session cookies and the explicitly set cookies will be merged when sending the request. Defaults to `None`.
+            params: Sent as parameters in the query string of the new request. \
+                Ignored for subsequent redirected requests (optional). \
+                Defaults to `{}`.
+            data: The data to send in the body of the request. This can be a \
+                FormData object or anything that can be passed into FormData, \
+                e.g. a dictionary, bytes, or file-like object. \
+                Defaults to `None`.
+            json: Any json compatible python object. json and data parameters \
+                could not be used at the same time. Defaults to `None`.
+            cookies: HTTP Cookies to send with the request. Global session \
+                cookies and the explicitly set cookies will be merged when \
+                sending the request. Defaults to `None`.
             headers: HTTP Headers to send with the request. Defaults to `None`.
-            allow_redirects: If set to False, do not follow redirects. Defaults to `True`.
-            max_redirects: Maximum number of redirects to follow. Defaults to `10`.
+            allow_redirects: If set to False, do not follow redirects. \
+                Defaults to `True`.
+            max_redirects: Maximum number of redirects to follow. \
+                Defaults to `10`.
             proxy: Proxy URL. Defaults to `None`.
             timeout: Override the session's timeout. Defaults to `None`.
 
@@ -290,8 +304,8 @@ class CallbackBuilder:
             dictionary and an error object after processing an
             `aiohttp.ClientResponse`.
             *handlers: Additional asynchronous handler functions that take a
-            dictionary and an `aiohttp.ClientResponse` object as input, returning
-            a modified dictionary and an error object.
+            dictionary and an `aiohttp.ClientResponse` object as input,
+            returning a modified dictionary and an error object.
 
         Returns:
             Callable[..., Awaitable[ResponseCbOut]]: An asynchronous callback
