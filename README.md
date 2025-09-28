@@ -7,4 +7,5 @@
 
 `aiohttp-toolkit` - package to ease the process of handling aiohttp with premade functions
 
-> Docs will be added soon.
+> [!WARNING]
+> This package is archived and no longer maintained. I've moved away from `aiohttp`, primarily due to its lack of HTTP/2 support (see [issue #5631](https://github.com/aio-libs/aiohttp/issues/5631)). I recommend switching to another library.
